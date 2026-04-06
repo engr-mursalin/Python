@@ -1,1 +1,21 @@
-in this file have all leadcode problems
+class Solution {
+    public int numComponents(ListNode head, int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for (int n : nums) set.add(n);
+
+        int count = 0;
+        ListNode curr = head;
+
+        while (curr != null) {
+            // start of a new component: curr is in set, but prev wasn't
+            if (set.contains(curr.val) &&
+               (curr.next == null || !set.contains(curr.next.val))) {
+                count++;
+            }
+            curr = curr.next;
+        }
+
+        return count;
+    }
+}
+
